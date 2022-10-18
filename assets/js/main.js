@@ -97,6 +97,14 @@ function generateField(domEl, levelDiff, cellsNumber) {
         // al click dell'utente la casella diventa blu
         cellElement.addEventListener('click', function(){
             
+            const victoryCells = (cellsNumber - 16);
+            console.log(victoryCells);
+            
+            const activeCells = document.querySelectorAll(`.active`);
+            console.log(activeCells);
+
+            const yourScore = activeCells.length;
+            
             this.classList.toggle("active");
 
             for (let index = 0; index < pcBombs.length; index++) {
@@ -106,22 +114,15 @@ function generateField(domEl, levelDiff, cellsNumber) {
                     this.classList.remove("active");
                     this.classList.toggle("bomb");
                     
-
                     resultsH2.classList.add("loser")
-                    resultsH2.innerText = "Hai perso!";
+                    resultsH2.innerText = `Hai perso! Il tuo punteggio è di ${yourScore} caselle calpestate su ${victoryCells} calpestabili`;
                     resultsEl.insertAdjacentElement(`beforeend`, resultsH2);
                 }
             }
-
-            const victoryCells = (cellsNumber - 16);
-            console.log(victoryCells);
     
-            const activeCells = document.querySelectorAll(`.active`);
-            console.log(activeCells);
-    
-            if (activeCells.length == victoryCells) {
+            if (yourScore == victoryCells) {
                 resultsH2.classList.add("winner")
-                resultsH2.innerText = `Hai vinto! <br> Il tuo punteggio è di ${victoryCells} caselle calpestate su ${victoryCells} calpestabili`;
+                resultsH2.innerText = `Hai vinto! Il tuo punteggio è di ${victoryCells} caselle calpestate su ${victoryCells} calpestabili`;
                 resultsEl.insertAdjacentElement(`beforeend`, resultsH2);
             }
 
