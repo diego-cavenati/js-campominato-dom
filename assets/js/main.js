@@ -148,14 +148,14 @@ playDiff3.addEventListener('click', function(){
 
 // // genero 16 numeri casuali, le bombe, i numeri non devono ripetersi
 
+generateBombs(1, level);
 /**
  * Genero i numeri in cui ci saranno le bombe in maniera casuale
  * @param {Number} min minima casella 
  * @param {Number} max casella massima in base al livello
- * @returns 
+ * @returns array with random number
  */
 
-generateBombs(1, level);
 
 function generateBombs(min, max) {
 
@@ -170,8 +170,9 @@ function generateBombs(min, max) {
             bombs.push(bomb);
         }
 
-        //bombs.length++
     }
+    
+    console.log(bombs);
     
     return bombs
 }
