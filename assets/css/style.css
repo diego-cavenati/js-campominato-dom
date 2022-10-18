@@ -6,7 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    max-width: 1142px;
+    max-width: 500px;
     margin:  0 auto;
 }
 
@@ -51,4 +51,16 @@ body {
 
 .cell.bomb {
     background-color: red;
+}
+
+.results {
+    text-align: center;
+}
+
+.loser {
+    color: red;
+}
+
+.winner {
+    color: green;
 }

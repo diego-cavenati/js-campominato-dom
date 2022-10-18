@@ -1,7 +1,3 @@
-/* L'utente clicca su un bottone che genererà una griglia di gioco quadrata. Ogni cella ha un numero progressivo, da 1 a 100.
-Ci saranno quindi 10 caselle per ognuna delle 10 righe.
-Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed emetto un messaggio in console con il numero della cella cliccata. */
-
 /*
 Consegna
 Copiamo la griglia fatta ieri nella nuova repo e aggiungiamo la logica del gioco
@@ -22,9 +18,13 @@ const playDiff3 = document.querySelector(`.diff_3`);
 // prendo elemento grid
 const gridEl = document.querySelector(`.grid`);
 
-// // decido grandezza griglia
-// let level = 100;
+// prendo elemento results
+const resultsEl = document.querySelector(`.results`)
 
+// creo elemento h2
+const resultsH2 = document.createElement('h2');
+
+// decido grandezza griglia e la difficoltà
 const classLevel1 = `cellDiff1`;
 const CellsDiff1 = 100;
 
@@ -33,8 +33,6 @@ const CellsDiff2 = 81;
 
 const classLevel3 = `cellDiff3`;
 const CellsDiff3 = 49;
-
-
 
 
 // click play game diff 1
@@ -61,7 +59,6 @@ playDiff2.addEventListener('click', function(){
 
 // click play game diff 3
 playDiff3.addEventListener('click', function(){
-
     
     gridEl.innerHTML = ``;
 
@@ -86,7 +83,7 @@ function generateField(domEl, levelDiff, cellsNumber) {
     let level = cellsNumber;
 
     let pcBombs = generateBombs(1, level);
-    //console.log(pcBombs);
+    console.log(pcBombs);
 
     for (let i = 1; i <= level; i++) {
 
@@ -102,28 +99,40 @@ function generateField(domEl, levelDiff, cellsNumber) {
             
             this.classList.toggle("active");
 
-            //console.log(this);
-            //console.log(pcBombs);
-            //console.log(i);
-
             for (let index = 0; index < pcBombs.length; index++) {
                 const element = pcBombs[index];
 
                 if (i == element) {
                     this.classList.remove("active");
                     this.classList.toggle("bomb");
+                    
+
+                    resultsH2.classList.add("loser")
+                    resultsH2.innerText = "Hai perso!";
+                    resultsEl.insertAdjacentElement(`beforeend`, resultsH2);
                 }
+            }
+
+            const victoryCells = (cellsNumber - 16);
+            console.log(victoryCells);
+    
+            const activeCells = document.querySelectorAll(`.active`);
+            console.log(activeCells);
+    
+            if (activeCells.length == victoryCells) {
+                resultsH2.classList.add("winner")
+                resultsH2.innerText = `Hai vinto! <br> Il tuo punteggio è di ${victoryCells} caselle calpestate su ${victoryCells} calpestabili`;
+                resultsEl.insertAdjacentElement(`beforeend`, resultsH2);
             }
 
         }
         )
-        
+
     }
 
 }
 
-// genero 16 numeri casuali, le bombe, i numeri non devono ripetersi
-generateBombs(1, level);
+
 /**
  * Genero i numeri in cui ci saranno le bombe in maniera casuale
  * @param {Number} min minima casella 
@@ -147,8 +156,6 @@ function generateBombs(min, max) {
 
     return bombs
 }
-
-
 
 /**
  * Genero un numero random
