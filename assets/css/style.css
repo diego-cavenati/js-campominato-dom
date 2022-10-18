@@ -46,7 +46,7 @@ body {
 }
 
 .cell.active {
-    background-color: blue;
+    background-color: greenyellow;
 }
 
 .cell.bomb {

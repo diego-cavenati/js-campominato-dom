@@ -106,6 +106,7 @@ function generateField(domEl, levelDiff, cellsNumber) {
             const yourScore = activeCells.length;
             
             this.classList.toggle("active");
+            this.innerHTML = `<i class="fa-solid fa-fan"></i>`;
 
             for (let index = 0; index < pcBombs.length; index++) {
                 const element = pcBombs[index];
@@ -113,7 +114,7 @@ function generateField(domEl, levelDiff, cellsNumber) {
                 if (i == element) {
                     this.classList.remove("active");
                     this.classList.toggle("bomb");
-                    
+                    this.innerHTML = `<i class="fa-solid fa-bomb"></i>`;
                     resultsH2.classList.add("loser")
                     resultsH2.innerText = `Hai perso! Il tuo punteggio è di ${yourScore} caselle calpestate su ${victoryCells} calpestabili`;
                     resultsEl.insertAdjacentElement(`beforeend`, resultsH2);
