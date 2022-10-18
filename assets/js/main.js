@@ -113,7 +113,8 @@ playDiff3.addEventListener('click', function(){
 
     function generateField(max, domEl) {
 
-        // generateBombs(1, level);
+        let pcBombs = generateBombs(1, level);
+        console.log(pcBombs);
 
         for (let i = 1; i <= level; i++) {
 
@@ -128,13 +129,19 @@ playDiff3.addEventListener('click', function(){
             cellElement.addEventListener('click', function(){
                 
                 this.classList.toggle("active");
+
                 //console.log(this);
+                //console.log(pcBombs);
+                //console.log(i);
 
-                if (this == bombs) {
-                    this.classList.remove("active");
-                    this.classList.toggle("bomb");
+                for (let index = 0; index < pcBombs.length; index++) {
+                    const element = pcBombs[index];
+
+                    if (i == element) {
+                        this.classList.remove("active");
+                        this.classList.toggle("bomb");
+                    }
                 }
-
 
             }
             )
@@ -157,9 +164,10 @@ generateBombs(1, level);
  */
 
 
+
 function generateBombs(min, max) {
 
-    const bombs = [];
+    let bombs = [];
     
     while (bombs.length !== 16){
         // assegno a bomb un valore casuale
@@ -171,13 +179,11 @@ function generateBombs(min, max) {
         }
 
     }
-    
-    console.log(bombs);
-    
+
     return bombs
 }
 
-console.log(bombs);
+
 
 /**
  * Genero un numero random
@@ -192,7 +198,9 @@ function getRandomNumber (min, max) {
 
 
 /*
-In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. 
+
+Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
 La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
 Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba. 
 */
