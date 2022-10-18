@@ -22,8 +22,54 @@ const playDiff3 = document.querySelector(`.diff_3`);
 // prendo elemento grid
 const gridEl = document.querySelector(`.grid`);
 
-// decido grandezza griglia
-let level = 100;
+// // decido grandezza griglia
+// let level = 100;
+
+const classLevel1 = `cellDiff1`;
+const CellsDiff1 = 100;
+
+const classLevel2 = `cellDiff2`;
+const CellsDiff2 = 81;
+
+const classLevel3 = `cellDiff3`;
+const CellsDiff3 = 49;
+
+
+
+
+// click play game diff 1
+playDiff1.addEventListener('click', function(){
+
+    gridEl.innerHTML = ``;
+
+    // generazione griglia di gioco quadrata
+    generateField(gridEl, classLevel1, CellsDiff1);
+
+}
+)
+
+// click play game diff 2
+playDiff2.addEventListener('click', function(){
+
+    gridEl.innerHTML = ``;
+
+    // generazione griglia di gioco quadrata
+    generateField(gridEl, classLevel2, CellsDiff2);
+
+}
+)
+
+// click play game diff 3
+playDiff3.addEventListener('click', function(){
+
+    
+    gridEl.innerHTML = ``;
+
+    // generazione griglia di gioco
+    generateField(gridEl, classLevel3, CellsDiff3);
+
+}
+)
 
 // generazione singola cell
 function generateMarkup(numb) {
@@ -34,127 +80,49 @@ function generateMarkup(numb) {
     return cellElement
 }
 
-// click play game diff 1
-playDiff1.addEventListener('click', function(){
+// Diff function
+function generateField(domEl, levelDiff, cellsNumber) {
 
-    gridEl.innerHTML = ``;
+    let level = cellsNumber;
 
-    // generazione griglia di gioco quadrata 10x10
-    generateField(level, gridEl);
-    function generateField(max, domEl) {
+    let pcBombs = generateBombs(1, level);
+    //console.log(pcBombs);
 
-        for (let i = 1; i <= level; i++) {
+    for (let i = 1; i <= level; i++) {
 
-            const cellElement = generateMarkup(i);
+        const cellElement = generateMarkup(i);
 
-            // inserisci il markup nel container
-            cellElement.classList.add('cellDiff1');
-            domEl.insertAdjacentElement(`beforeend`, cellElement);
+        // inserisci il markup nel container
+        cellElement.classList.add(levelDiff);
 
-            // al click dell'utente la casella diventa blu
-            cellElement.addEventListener('click', function(){
-                
-                this.classList.toggle("active");
-                console.log(this);
+        domEl.insertAdjacentElement(`beforeend`, cellElement);
 
-            }
-            )
+        // al click dell'utente la casella diventa blu
+        cellElement.addEventListener('click', function(){
             
-        }
+            this.classList.toggle("active");
 
-    }
+            //console.log(this);
+            //console.log(pcBombs);
+            //console.log(i);
 
-}
-)
+            for (let index = 0; index < pcBombs.length; index++) {
+                const element = pcBombs[index];
 
-// click play game diff 2
-playDiff2.addEventListener('click', function(){
-
-    let level = 81;
-    gridEl.innerHTML = ``;
-
-    // generazione griglia di gioco quadrata 10x10
-    generateField(level, gridEl);
-    function generateField(max, domEl) {
-
-        for (let i = 1; i <= level; i++) {
-
-            const cellElement = generateMarkup(i);
-
-            // inserisci il markup nel container
-            cellElement.classList.add('cellDiff2');
-
-            domEl.insertAdjacentElement(`beforeend`, cellElement);
-
-            // al click dell'utente la casella diventa blu
-            cellElement.addEventListener('click', function(){
-                
-                this.classList.toggle("active");
-                console.log(this);
-
-            }
-            )
-            
-        }
-
-    }
-
-}
-)
-
-// click play game diff 3
-playDiff3.addEventListener('click', function(){
-
-    let level = 49;
-    gridEl.innerHTML = ``;
-
-    // generazione griglia di gioco quadrata 10x10
-    generateField(level, gridEl);
-
-    function generateField(max, domEl) {
-
-        let pcBombs = generateBombs(1, level);
-        console.log(pcBombs);
-
-        for (let i = 1; i <= level; i++) {
-
-            const cellElement = generateMarkup(i);
-
-            // inserisci il markup nel container
-            cellElement.classList.add('cellDiff3');
-
-            domEl.insertAdjacentElement(`beforeend`, cellElement);
-
-            // al click dell'utente la casella diventa blu
-            cellElement.addEventListener('click', function(){
-                
-                this.classList.toggle("active");
-
-                //console.log(this);
-                //console.log(pcBombs);
-                //console.log(i);
-
-                for (let index = 0; index < pcBombs.length; index++) {
-                    const element = pcBombs[index];
-
-                    if (i == element) {
-                        this.classList.remove("active");
-                        this.classList.toggle("bomb");
-                    }
+                if (i == element) {
+                    this.classList.remove("active");
+                    this.classList.toggle("bomb");
                 }
-
             }
-            )
-            
-        }
 
+        }
+        )
+        
     }
 
 }
-)
 
-// // genero 16 numeri casuali, le bombe, i numeri non devono ripetersi
-
+// genero 16 numeri casuali, le bombe, i numeri non devono ripetersi
 generateBombs(1, level);
 /**
  * Genero i numeri in cui ci saranno le bombe in maniera casuale
@@ -162,9 +130,6 @@ generateBombs(1, level);
  * @param {Number} max casella massima in base al livello
  * @returns array with random number
  */
-
-
-
 function generateBombs(min, max) {
 
     let bombs = [];
@@ -194,6 +159,14 @@ function generateBombs(min, max) {
 function getRandomNumber (min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
 }
+
+
+
+
+
+
+
+
 
 
 
