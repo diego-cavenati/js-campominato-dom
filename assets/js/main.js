@@ -113,7 +113,7 @@ playDiff3.addEventListener('click', function(){
 
     function generateField(max, domEl) {
 
-        generateBombs(1, level);
+        // generateBombs(1, level);
 
         for (let i = 1; i <= level; i++) {
 
@@ -124,15 +124,13 @@ playDiff3.addEventListener('click', function(){
 
             domEl.insertAdjacentElement(`beforeend`, cellElement);
 
-
-
             // al click dell'utente la casella diventa blu
             cellElement.addEventListener('click', function(){
                 
                 this.classList.toggle("active");
                 //console.log(this);
 
-                if (this === bombs) {
+                if (this == bombs) {
                     this.classList.remove("active");
                     this.classList.toggle("bomb");
                 }
@@ -156,26 +154,29 @@ playDiff3.addEventListener('click', function(){
  * @param {Number} max casella massima in base al livello
  * @returns 
  */
+
+generateBombs(1, level);
+
 function generateBombs(min, max) {
 
-    let bombs = [];
+    const bombs = [];
     
     while (bombs.length !== 16){
-        // GENERO numero se il numero è stato già inserito
+        // assegno a bomb un valore casuale
         const bomb = getRandomNumber(min, max);
 
-        // se non lo è lo aggiungo
+        // se bomb ha un valore che non c'è in bombs lo aggiungo
         if (!bombs.includes(bomb)) {
-            // se è falsa eseguo il codice
             bombs.push(bomb);
         }
 
-        bombs.length++
+        //bombs.length++
     }
-    console.log(bombs);
-
+    
     return bombs
 }
+
+console.log(bombs);
 
 /**
  * Genero un numero random
