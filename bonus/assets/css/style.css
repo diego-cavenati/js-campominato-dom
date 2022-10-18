@@ -1,0 +1,66 @@
+body {
+    background-color: lightgray;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 500px;
+    margin:  0 auto;
+}
+
+.row {
+    text-align: center;
+}
+
+.grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.play {
+    margin-bottom: 1rem;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    background-color: gray;
+}
+
+.cellDiff1 {
+    width: calc(100% / 10);
+}
+
+.cellDiff2 {
+    width: calc(100% / 9);
+}
+
+.cellDiff3 {
+    width: calc(100% / 7);
+}
+
+.cell.active {
+    background-color: greenyellow;
+}
+
+.cell.bomb {
+    background-color: red;
+}
+
+.results {
+    text-align: center;
+}
+
+.loser {
+    color: red;
+}
+
+.winner {
+    color: green;
+}
